@@ -1,76 +1,86 @@
 class Solution {
   String addBinary(String a, String b) {
+    int i = a.length - 1, j = b.length - 1; 
+    int excessValue = 0;
     String result = "";
-    String passToNext = "0";
-    int i = a.length - 1;
-    int j = b.length - 1;
     while(i >= 0 || j >= 0){
       if(i >= 0 && j >= 0){
-        if(int.parse(a[i]) + int.parse(b[j]) + int.parse(passToNext) == 3){
-          if(i == 0){
+        if(toInt(a[i]) + toInt(b[j]) + excessValue == 3){
+          if(i == 0 && j == 0){
             result += "11";
           }else{
             result += "1";
-            passToNext = "1";
+            excessValue = 1;
           }
-        }else if(int.parse(a[i]) + int.parse(b[j]) + int.parse(passToNext) ==  2){
+        }else if(toInt(a[i]) + toInt(b[j]) + excessValue == 2){
           if(i == 0 && j == 0){
             result += "01";
           }else{
             result += "0";
-            passToNext = "1";
+            excessValue = 1;
           }
-        }else if(int.parse(a[i]) + int.parse(b[j]) + int.parse(passToNext) ==  1){
+        }else if(toInt(a[i]) + toInt(b[j]) + excessValue == 1){
           result += "1";
-          if(int.parse(passToNext) ==  1){
-            passToNext = "0";
-          }
+          excessValue = 0;
         }else{
           result += "0";
         }
-      }else{
-        if(i >= 0){
-          if(int.parse(a[i]) + int.parse(passToNext) == 2 && i > 0){
-            result += "0";
-          }else{
+      }else if(i >= 0){
+        if(excessValue + toInt(a[i]) == 2){
+          if(i == 0){
             result += "01";
+            break;
           }
-        }if(j >= 0){
-          if(int.parse(b[j]) + int.parse(passToNext) == 2 && j > 0){
+          else{
             result += "0";
-          }else{
-            result += "01";
           }
+        }else if(excessValue + toInt(a[i]) == 1){
+          result += "1";
+          excessValue = 0;
+        }else{
+          result += "0";
+        }
+      }else if(j >= 0){
+        if(excessValue + toInt(b[j]) == 2){
+          if(j == 0){
+            result += "01";
+            break;
+          }
+          else{
+            result += "0";
+          }
+        }else if(excessValue + toInt(b[j]) == 1){
+          result += "1";
+          excessValue = 0;
+        }else{
+          result += "0";
         }
       }
       i--;
       j--;
-      if(i < 0 && passToNext == "0"){
-        b.split("").removeRange(0, j);
-        result += b.split("").reversed.join();
-        break;
-      }else if(j < 0 && passToNext == "0"){
-        a.split("").removeRange(0, i);
-        result += a.split("").reversed.join();
-        break;
-      }
     }
     return result.split("").reversed.join();
+  }
+  int toInt(String a){
+    return int.parse(a);
   }
 }
 class Solution2 {
   String addBinary(String a, String b) {
     int i = a.length - 1, j = b.length - 1; 
-    int excessValue = 0;
+    int c = 0;
+    String result = "";
     while(i >= 0 || j >= 0){
-      if(i >= 0 && j >= 0){
-        if(toInt(a[i]) + toInt(b[i]) + excessValue == 3){
-          
-        }
+      if(i >= 0){
+        c += toInt(a[i--]); 
       }
-      i--;
-      j--;
+      if(j >= 0){
+        c += toInt(a[j--]); 
+      }
+      result += (c%2).toString();
+      c ~/= 2;
     }
+    return result;
   }
   int toInt(String a){
     return int.parse(a);
@@ -78,5 +88,5 @@ class Solution2 {
 }
 void main(){
   Solution s = Solution();
-  print(s.addBinary("100", "110010"));
+  print(s.addBinary("1", "111"));
 }
