@@ -34,6 +34,6 @@ class Solution3 {
   }
 }
 void main(){
-  Solution3 s = Solution3();
+  Solution s = Solution();
   print(s.climbStairs(45));
 }
