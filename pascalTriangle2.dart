@@ -1,10 +1,10 @@
 class Solution {
-  List<List<int>> generate(int numRows) {
-    if(numRows <= 1) return numRows == 1 ? [[1]] : [[]];
+  List<int> getRow(int rowIndex) {
     List<List<int>> pascalTriangle = [[1],[1,1]];
+    if(rowIndex <= 1) return rowIndex == 1 ? pascalTriangle[1] : pascalTriangle[0];
     int i = 3;
     List<int> temp;
-    while(i <= numRows){
+    while(i <= rowIndex + 1){
       temp = List.filled(i, 0);
       temp[0] = 1;
       temp[i - 1] = 1;
@@ -16,10 +16,10 @@ class Solution {
       pascalTriangle.add(temp);
       i++;
     }
-    return pascalTriangle;
+    return pascalTriangle[rowIndex];
   }
 }
 void main(){
   Solution s = Solution();
-  print(s.generate(7));
+  print(s.getRow(5));
 }
