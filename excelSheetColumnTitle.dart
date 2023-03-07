@@ -30,5 +30,5 @@ class Solution2 {
 }
 void main(){
   Solution s = Solution();
-  print(s.convertToTitle(52));
+  print(s.convertToTitle(17650));
 }
