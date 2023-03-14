@@ -28,10 +28,13 @@ class Solution2 {
     
     List<String> s1;
     List<String> t2;
+    
     s1 = s.split("");
     t2 = t.split("");
+
     s1.sort();
     t2.sort();
+
     s = s1.join();
     t = t2.join();
 
