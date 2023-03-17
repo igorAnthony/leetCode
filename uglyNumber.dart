@@ -14,4 +14,4 @@ class Solution {
 void main(){
   Solution s = Solution();
   print(s.isUgly(7));
-}
+} 

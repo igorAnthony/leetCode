@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Solution {
   int addDigits(int num) {
     while(num >= 10){

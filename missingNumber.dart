@@ -1,8 +1,5 @@
 class Solution {
   int missingNumber(List<int> nums) {
-    if(nums.length == 1){
-      return nums[0] > 0 ? nums[0] - 1 : nums[0] + 1;
-    }
     nums.sort();
     int prev = nums[0];
     if(prev != 0) return 0;
