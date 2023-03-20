@@ -9,7 +9,6 @@ class Solution {
       s[j] = aux;
       j--;
     }
-    print(s);
   }
 }
 void main(){
